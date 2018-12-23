@@ -1,0 +1,201 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Universities ... | Welcome</title>
+		<link rel="stylesheet" href="./style/admin1.css">
+		<style>
+		</style>
+	</head>
+	<!---->
+	
+	<body>
+		<header>
+			<div class="container">
+				<div id="branding">
+					<h1><span class="highlight">Universities</span> & Schools</h1>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="main.php">Main</a></li>
+						<li><a href="list.php">List</a></li>
+						<li><a href="insert.html">Insert</a></li>
+						<li class="current"><a href="admin.html">Admin</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div class="page">
+			<?php
+			$con=mysqli_connect("127.0.0.1","root","","project");
+			if(isset($_GET['acc'])){
+				if($_GET['pass']===$_GET['pass1']){
+					$sql="INSERT INTO `admins`(`id`, `name`, `password`) VALUES (null,'".$_GET['acc']."','".$_GET['pass']."')";
+					//$result=mysqli_query($con, $sql);
+					if (mysqli_query($con, $sql)) {
+					} 
+				}
+				else{
+					$url='registration.html';
+					echo '<meta http-equiv="refresh" content="0; url='.$url.'">';				}
+			}
+			else{
+				$val=0;
+				$sql="select * from admins";
+				$query=mysqli_query($con,$sql);
+				$num=mysqli_num_rows($query);
+				for ($i=0; $i <$num ; $i++) {
+					$result=mysqli_fetch_array($query);
+					$name=$result['name'];
+					if($name===$_GET['name']){
+						$pass=$result['password'];
+						if($pass===$_GET['password']){
+							$val=1;
+						}
+					}
+				}
+				if($val==0){
+					$url='admin.html';
+					echo '<meta http-equiv="refresh" content="0; url='.$url.'">';
+				}	
+			}
+		?>
+		
+		<?php
+			$con=mysqli_connect("127.0.0.1","root","","project");
+			$sql="SELECT * FROM `adminpage`,`main` WHERE adminpage.maker_name=main.id";
+			$query=mysqli_query($con,$sql);
+			$num=mysqli_num_rows($query);
+			for ($i=0; $i <$num ; $i++) {
+				$result=mysqli_fetch_array($query);
+				$img=$result['image'];
+				$id=$result['id'];
+				$name=$result['name'];
+				$locat=$result['location'];
+				$desc=$result['descrip'];
+				print '
+					<div class="card_first" style="margin-top:40px;">
+						<img class="img" src="'.$img.'">
+						<section class="info">
+							<div id="row">
+								<h4>'.$name.'</h4>
+							</div>
+							<p class="about">'.$locat.'</p>
+							<p class="about">'.$desc.'</p>
+						</section>
+						<form action="qwerty.php">
+							<input type="hidden" id="userInput" name="id" value='.$id.'>
+    						<input type="submit" value="Update" class="button boxButton"/>
+						</form>
+						<form action="delete.php">
+							<input type="hidden" id="userInput" name="id" value='.$id.'>
+    						<input type="submit" value="Delete" class="button boxButton"/>
+						</form>
+</div>';
+}
+		?>
+		</div>
+		<footer>
+			<p>Kazakhstan,Almaty &copy; 2017</p>
+		</footer>
+	</body>
+</html><html>
+	<head>
+		<meta charset="utf-8">
+		<title>Universities ... | Welcome</title>
+		<link rel="stylesheet" href="./style/admin1.css">
+		<style>
+		</style>
+	</head>
+	<!---->
+	
+	<body>
+		<header>
+			<div class="container">
+				<div id="branding">
+					<h1><span class="highlight">Universities</span> & Schools</h1>
+				</div>
+				<nav>
+					<ul>
+						<li><a href="main.php">Main</a></li>
+						<li><a href="list.php">List</a></li>
+						<li><a href="insert.html">Insert</a></li>
+						<li class="current"><a href="admin.html">Admin</a></li>
+					</ul>
+				</nav>
+			</div>
+		</header>
+		<div class="page">
+			<?php
+			$con=mysqli_connect("127.0.0.1","root","","project");
+			if(isset($_GET['acc'])){
+				if($_GET['pass']===$_GET['pass1']){
+					$sql="INSERT INTO `admins`(`id`, `name`, `password`) VALUES (null,'".$_GET['acc']."','".$_GET['pass']."')";
+					//$result=mysqli_query($con, $sql);
+					if (mysqli_query($con, $sql)) {
+					} 
+				}
+				else{
+					$url='registration.html';
+					echo '<meta http-equiv="refresh" content="0; url='.$url.'">';				}
+			}
+			else{
+				$val=0;
+				$sql="select * from admins";
+				$query=mysqli_query($con,$sql);
+				$num=mysqli_num_rows($query);
+				for ($i=0; $i <$num ; $i++) {
+					$result=mysqli_fetch_array($query);
+					$name=$result['name'];
+					if($name===$_GET['name']){
+						$pass=$result['password'];
+						if($pass===$_GET['password']){
+							$val=1;
+						}
+					}
+				}
+				if($val==0){
+					$url='admin.html';
+					echo '<meta http-equiv="refresh" content="0; url='.$url.'">';
+				}	
+			}
+		?>
+		
+		<?php
+			$con=mysqli_connect("127.0.0.1","root","","project");
+			$sql="SELECT * FROM `adminpage`,`main` WHERE adminpage.maker_name=main.id";
+			$query=mysqli_query($con,$sql);
+			$num=mysqli_num_rows($query);
+			for ($i=0; $i <$num ; $i++) {
+				$result=mysqli_fetch_array($query);
+				$img=$result['image'];
+				$id=$result['id'];
+				$name=$result['name'];
+				$locat=$result['location'];
+				$desc=$result['descrip'];
+				print '
+					<div class="card_first" style="margin-top:40px;">
+						<img class="img" src="'.$img.'">
+						<section class="info">
+							<div id="row">
+								<h4>'.$name.'</h4>
+							</div>
+							<p class="about">'.$locat.'</p>
+							<p class="about">'.$desc.'</p>
+						</section>
+						<form action="qwerty.php">
+							<input type="hidden" id="userInput" name="id" value='.$id.'>
+    						<input type="submit" value="Update" class="button boxButton"/>
+						</form>
+						<form action="delete.php">
+							<input type="hidden" id="userInput" name="id" value='.$id.'>
+    						<input type="submit" value="Delete" class="button boxButton"/>
+						</form>
+</div>';
+}
+		?>
+		</div>
+		<footer>
+			<p>Kazakhstan,Almaty &copy; 2018</p>
+		</footer>
+	</body>
+</html>
